@@ -1,7 +1,9 @@
+import json
 from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from mycatalog.forms import ProductEditForm
 from mycatalog.models import Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -35,10 +37,15 @@ def edit(request, id):
     form = ProductEditForm(request.POST or None, instance=product)
     if form.is_valid():
         form.save()
-        return redirect(reverse('product_page', kwargs={'id': id}))
+        return HttpResponse(json.dumps({
+            'message': 'Product saved',
+            'form': render_to_string('mycatalog/edit_product_form.html', {'form': form})
+        }), content_type='application/json')
     else:
-        return render(request, 'mycatalog/edit_product.html', {'product': product, 'form': form})
-
+        if request.POST:
+            return render(request, 'mycatalog/edit_product_form.html', {'form': form})
+        else:
+            return render(request, 'mycatalog/edit_product.html', {'product': product, 'form': form})
 
 
 

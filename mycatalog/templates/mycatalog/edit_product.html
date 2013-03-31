@@ -6,29 +6,12 @@
 
 
     <div>
-        <h1>Change product: {{ product.product_name }}</h1>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span5 form_edit">
-                    <table>
-                        <form class="form-inline" method="post" action="{% url "edit" product.id %}">
-                            {% csrf_token %}
-                            {{ form.product_name.label_tag }} {{ form.product_name }}
-                            {{ form.product_description.label_tag }} {{ form.product_description }}
-                            {{ form.product_weight.label_tag }} {{ form.product_weight }}
-                            {{ form.product_height.label_tag }} {{ form.product_height }}
-                            {{ form.product_color_once_more.label_tag }} {{ form.product_color_once_more }}
-                            {{ form.product_color.label_tag }} {{ form.product_color }}
-                            <div><button class="btn btn-large btn-primary" type="submit">Save</button></div>
-                        </form>
-                    </table>
+        <h1>Change product: <a href="{% url "product_page" product.id %}">{{ product.product_name }}</a></h1>
+        <form id="product-edit-form" class="form-inline" method="post" action="{% url "edit" product.id %}">
 
-                </div>
-                <div class="span5">
-                    {{ form.product_preview }}
-                </div>
-            </div>
-        </div>
+            {% include 'mycatalog/edit_product_form.html' %}
+
+        </form>
 
     </div>
 

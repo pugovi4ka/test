@@ -9,7 +9,7 @@ class CustomColorWidget(TextInput):
             'all': ('mycatalog/colorpicker/css/colorpicker.css',)
         }
 
-        js = ('mycatalog/jquery-1.9.1.min.js',
+        js = (
               'mycatalog/colorpicker/js/bootstrap-colorpicker.js',
               'mycatalog/colorpicker-widget.js',
         )

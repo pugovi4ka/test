@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span5 form_edit">
+
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <p><input class="btn btn-large btn-primary" type="submit" value="Save" /></p>
+
+
+        </div>
+    </div>
+</div>
