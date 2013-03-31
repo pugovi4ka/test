@@ -12,3 +12,9 @@ class Product(models.Model):
 
     def __unicode__(self):
         return self.product_name
+
+
+class Statistic(models.Model):
+    url = models.CharField(max_length=255)
+    method = models.CharField(max_length=255)
+    response_status_code = models.CharField(max_length=255)

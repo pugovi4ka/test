@@ -1,0 +1,26 @@
+{% extends 'mycatalog/catalog.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <th>URL</th>
+                    <th>Method</th>
+                    <th>Response code</th>
+                    </thead>
+                    <tbody>
+                    {% for stat_object in stat %}
+                        <tr>
+                            <td>{{ stat_object.url }}</td>
+                            <td>{{ stat_object.method }}</td>
+                            <td>{{ stat_object.response_status_code }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from mycatalog.forms import ProductEditForm
-from mycatalog.models import Product
+from mycatalog.models import Product, Statistic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -50,3 +50,6 @@ def edit(request, id):
 
 
 
+def statistic(request):
+    stat = Statistic.objects.all().order_by('-id')[:100]
+    return render(request, 'mycatalog/statistic.html',{'stat': stat })

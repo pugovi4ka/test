@@ -23,14 +23,19 @@
 
 <div class="row-fluid">
     <div class="header">
-        <h1>Интернет-каталог удобной мебели</h1>
+        <h1>Internet catalog convinient furniture</h1>
     </div>
 </div>
 
-{% block content %}
 
+
+{% block content %}
     <div class="container-fluid">
         <div class="row-fluid">
+            <div class="span12">
+                <p><a href="{% url "statistic" %}">Site statistics</a></p>
+            </div>
+
             {% for product in products %}
                 <div class="span4 product_catalog">
                     <h1 class="product_name_header"><a href="{% url "product_page" product.id %}"> {{ product.product_name }} </a></h1>
