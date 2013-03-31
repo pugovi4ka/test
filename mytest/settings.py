@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     "django.contrib.admin",
     'easy_thumbnails',
+    'south',
     'mycatalog',
 
 )
