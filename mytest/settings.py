@@ -7,7 +7,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
@@ -142,6 +142,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "mycatalog.context_processors.settings_context",
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -156,17 +159,18 @@ LOGGING = {
         }
     },
     'handlers': {
-        'mail_admins': {
+        'console': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
+            'class': 'logging.StreamHandler'
         }
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['console'],
             'level': 'ERROR',
             'propagate': True,
         },
     }
 }
+
+
