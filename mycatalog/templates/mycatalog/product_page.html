@@ -1,10 +1,12 @@
+
 {% extends 'mycatalog/catalog.html' %}
+{% load thumbnail %}
 {% block content %}
     <div class = "product_page_style">
         <h2>{{ product.product_name }}</h2>
         <div class="row ">
             <div class="span9">
-                <img src="{{ MEDIA_URL }}{{ product.product_preview }}" class="img-circle">
+                <img src="{% thumbnail product.product_preview 300x300 %}" class="img-circle">
                 <div class="row">
                     <div class="span6">Descriprion: {{ product.product_description }}</div>
                     <div class="span3">Height: {{ product.product_height }}

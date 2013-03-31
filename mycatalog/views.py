@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from mycatalog.forms import ProductEditForm
 from mycatalog.models import Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -27,11 +28,18 @@ def product_page(request, id):
 def is_superuser_check(user):
     return user.is_superuser
 
+
 @user_passes_test(is_superuser_check, '/admin/')
-def edit(request,id):
+def edit(request, id):
     product = Product.objects.get(pk=id)
-    # if request.method == 'POST':
-    form = ProductEditForm(instance=product)
-    return render(request,'mycatalog/edit_product.html', {'product': product, 'form': form})
+    form = ProductEditForm(request.POST or None, instance=product)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('product_page', kwargs={'id': id}))
+    else:
+        return render(request, 'mycatalog/edit_product.html', {'product': product, 'form': form})
+
+
+
 
 

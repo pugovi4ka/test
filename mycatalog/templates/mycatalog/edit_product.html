@@ -6,7 +6,7 @@
             <div class="row-fluid">
                 <div class="span5 form_edit">
                     <table>
-                        <form class="form-inline" method="post" action="/">
+                        <form class="form-inline" method="post" action="{% url "edit" product.id %}">
                             {% csrf_token %}
                             {{ form.product_name.label_tag }} {{ form.product_name }}
                             {{ form.product_description.label_tag }} {{ form.product_description }}
