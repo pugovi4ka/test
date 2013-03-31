@@ -1,5 +1,10 @@
 {% extends 'mycatalog/catalog.html' %}
+{% block media %}
+    {{ form.media }}
+{% endblock %}
 {% block content %}
+
+
     <div>
         <h1>Change product: {{ product.product_name }}</h1>
         <div class="container-fluid">
@@ -12,6 +17,7 @@
                             {{ form.product_description.label_tag }} {{ form.product_description }}
                             {{ form.product_weight.label_tag }} {{ form.product_weight }}
                             {{ form.product_height.label_tag }} {{ form.product_height }}
+                            {{ form.product_color_once_more.label_tag }} {{ form.product_color_once_more }}
                             {{ form.product_color.label_tag }} {{ form.product_color }}
                             <div><button class="btn btn-large btn-primary" type="submit">Save</button></div>
                         </form>
@@ -25,5 +31,7 @@
         </div>
 
     </div>
+
+
 
 {% endblock %}
