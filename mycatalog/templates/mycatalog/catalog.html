@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'mycatalog/css/main.css' %}">
 
 </head>
-<body>
+<body class="background_for_body">
 
 <div class="row-fluid">
     <div class="header">
@@ -18,43 +19,51 @@
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        {% for product in products %}
-            <div class="span4 product_catalog">
-                <h1 class="product_name_header">{{ product.product_name }}</h1>
-                <h4>Description</h4>{{ product.product_description }}
+{% block content %}
 
-                <div class = "product_photo"><img src="{{ MEDIA_URL }}{{ product.product_preview }}" class="img-circle"></div>
-                <span>Weight: <b>{{ product.product_weight }}</b></span>
-                <span>Height: <b>{{ product.product_height }}</b></span>
-                <span>Color: <b>{{ product.product_color }}</b></span>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            {% for product in products %}
+                <div class="span4 product_catalog">
+                    <h1 class="product_name_header"><a href="{% url "product_page" product.id %}"> {{ product.product_name }} </a></h1>
+                    <h4>Description</h4>{{ product.product_description }}
+
+                    <div class = "product_photo"><img src="{{ MEDIA_URL }}{{ product.product_preview }}" class="img-circle"></div>
+                    <span>Weight: <b>{{ product.product_weight }}</b></span>
+                    <span>Height: <b>{{ product.product_height }}</b></span>
+                    <span>Color: <b>{{ product.product_color }}</b></span>
+                    {% if request.user.is_superuser %}
+                        <a href="{% url "edit" product.id %}"  class="btn btn-primary">Edit</a>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+            <div class="span6">
+            {# TODO: Place for random template_tag #}
             </div>
-
-        {% endfor %}
-        <div class="span6">
-        {# TODO: Place for random template_tag #}
         </div>
     </div>
-</div>
-<div class="pagination pagination-centered">
-    <ul>
-        {% if products.has_previous %}
-            <li><a href="?page={{ products.previous_page_number }}">Prev</a></li>
-        {% endif %}
 
-        {% if products.has_next or products.has_previous %}
-            {% for num_page in products.paginator.page_range  %}
-               <li{% if products.number == num_page %} class="active"{% endif %}><a href="?page={{ num_page }}">{{ num_page }}</a></li>
-            {% endfor %}
-        {% endif %}
 
-        {% if products.has_next %}
-            <li><a href="?page={{ products.next_page_number }}">Next</a></li>
-        {% endif %}
-    </ul>
-</div>
+    <div class="pagination pagination-centered">
+        <ul>
+            {% if products.has_previous %}
+                <li><a href="?page={{ products.previous_page_number }}">Prev</a></li>
+            {% endif %}
 
+            {% if products.has_next or products.has_previous %}
+                {% for num_page in products.paginator.page_range  %}
+                   <li{% if products.number == num_page %} class="active"{% endif %}><a href="?page={{ num_page }}">{{ num_page }}</a></li>
+                {% endfor %}
+            {% endif %}
+
+            {% if products.has_next %}
+                <li><a href="?page={{ products.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+{% endblock %}
 
 
 

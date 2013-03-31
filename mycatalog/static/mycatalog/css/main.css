@@ -4,7 +4,8 @@
     margin: 10px 20px 20px 20px;
     text-align: center;
     padding-top: 40px;
-
+    border-radius: 8px;
+    font-family: Gabriola, "Times New Roman", serif;
 }
 
 .product_catalog {
@@ -13,11 +14,31 @@
     padding: 10px;
     margin-top: 10px;
     height: 400px;
+    border-radius: 8px;
 }
 .product_name_header {
-    font-family: Gabriola;
+    font-family: Gabriola, "Times New Roman", serif;
+
 }
 
 .product_photo {
     margin-left: 70px;
+}
+.background_for_body {
+    background: #dfdfdf;
+}
+.product_page_photo {
+    margin-left: 20px;
+}
+h1,h2,h3,h4 {
+    font-family: Gabriola, "Times New Roman", serif;
+    margin-left: 50px;
+}
+.product_page_style {
+    margin-left: 20px;
+}
+.form_edit{
+    background: #c7b6d3;
+    padding: 10px;
+    border-radius: 8px;
 }

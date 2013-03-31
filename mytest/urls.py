@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
-from mycatalog.views import catalog
+from django.contrib.auth.views import login
+from mycatalog.views import catalog, product_page, edit
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -19,4 +20,7 @@ urlpatterns = patterns('',
                        # Uncomment the next line to enable the admin:
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^$', catalog, name='catalog'),
+                       url(r'^product/(?P<id>\d+)/$', product_page, name='product_page'),
+                       url(r'^edit/(?P<id>\d+)/$', edit, name='edit'),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
