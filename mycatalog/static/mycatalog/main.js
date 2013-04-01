@@ -12,11 +12,11 @@ $(document).ready(function() {
             form.removeClass('loading');
 
             if (response.message) {
-                form.html(response.form);
-
-                form.find('.alert').remove();
-                form.find('input[type="submit"]').parent()
-                    .after('<div class="alert alert-success">' + response.message + '</div>');
+                form.html(
+                    '<div class="alert alert-success">' + response.message +
+                        '<a href="' + response.edit_link + '">Edit product again</a> or ' +
+                        '<a href="' + response.product_link + '">show product</a>' +
+                    '</div>');
             } else {
                 form.html(response);
             }

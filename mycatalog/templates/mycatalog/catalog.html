@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load thumbnail %}
+{% load project_tags %}
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
 
 <div class="row-fluid">
     <div class="header">
-        <h1>Internet catalog convinient furniture</h1>
+       <a href="/"><h1>Internet catalog convinient furniture</h1></a>
     </div>
 </div>
 
@@ -33,7 +34,7 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
-                <p><a href="{% url "statistic" %}">Site statistics</a></p>
+                <h2><a href="{% url "statistic" %}">Site statistics</a></h2>
             </div>
 
             {% for product in products %}
@@ -44,16 +45,15 @@
                     <div class="product_photo"><img src="{% thumbnail product.product_preview 100x100 %}" class="img-circle"></div>
                     <span>Weight: <b>{{ product.product_weight }}</b></span>
                     <span>Height: <b>{{ product.product_height }}</b></span>
-                    <span>Color: <b>{{ product.product_color }}</b></span>
+                     Color 1: <span class="color-box" style="background-color: {{ product.product_color }}"></span>
+                     Color 2: <span class="color-box" style="background-color: {{ product.product_color_once_more }}"></span>
                     {% if request.user.is_superuser %}
                         <a href="{% url "edit" product.id %}"  class="btn btn-primary">Edit</a>
                     {% endif %}
                 </div>
 
             {% endfor %}
-            <div class="span6">
-            {# TODO: Place for random template_tag #}
-            </div>
+
         </div>
     </div>
 
@@ -76,9 +76,10 @@
         </ul>
     </div>
 
+{% product_list %}
+
+
 {% endblock %}
-
-
 
 
 

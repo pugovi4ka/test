@@ -1,18 +1,23 @@
 {% extends 'mycatalog/catalog.html' %}
+{% load thumbnail %}
 {% block media %}
     {{ form.media }}
 {% endblock %}
 {% block content %}
 
 
-    <div>
-        <h1>Change product: <a href="{% url "product_page" product.id %}">{{ product.product_name }}</a></h1>
-        <form id="product-edit-form" class="form-inline" method="post" action="{% url "edit" product.id %}">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span5 form_edit">
+                <h1>Change product: <a href="{% url "product_page" product.id %}">{{ product.product_name }}</a></h1>
+                <form id="product-edit-form" class="form-inline" enctype="multipart/form-data"
+                      method="post" action="{% url "edit" product.id %}">
+                    {% include 'mycatalog/edit_product_form.html' %}
 
-            {% include 'mycatalog/edit_product_form.html' %}
+                </form>
+            </div>
 
-        </form>
-
+        </div>
     </div>
 
 

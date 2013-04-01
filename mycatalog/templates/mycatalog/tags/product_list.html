@@ -1,0 +1,9 @@
+{% load thumbnail %}
+<ul class="random_product_list">
+{% for product in product_list %}
+    <li>
+       <a href="{% url "product_page" product.id %}" class = "product_url">{{ product.product_name }}</a>
+       <img src="{% thumbnail product.product_preview 100x100 %}" class="img-circle">
+    </li>
+{% endfor %}
+ </ul>

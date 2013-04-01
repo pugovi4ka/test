@@ -34,12 +34,14 @@ def is_superuser_check(user):
 @user_passes_test(is_superuser_check, '/admin/')
 def edit(request, id):
     product = Product.objects.get(pk=id)
-    form = ProductEditForm(request.POST or None, instance=product)
+    form = ProductEditForm(request.POST or None, request.FILES or None, instance=product)
     if form.is_valid():
         form.save()
         return HttpResponse(json.dumps({
-            'message': 'Product saved',
-            'form': render_to_string('mycatalog/edit_product_form.html', {'form': form})
+            'message': 'Product saved.',
+            'edit_link': reverse('edit', args=[id]),
+            'product_link': reverse('product_page', args=[id]),
+
         }), content_type='application/json')
     else:
         if request.POST:
